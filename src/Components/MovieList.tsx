@@ -69,7 +69,7 @@ export default function MovieList(props: props) {
                 </div>
 
 
-                <Pagination count={10} onChange={handlePageChange} page={page} />
+                <Pagination count={255} onChange={handlePageChange} page={page} />
             </div>
         )
     }

@@ -1,66 +1,20 @@
-import { FormControlLabel, MenuItem, Pagination, PaletteMode, Paper, Select, SelectChangeEvent, Switch, Tooltip } from "@mui/material";
-import { movies } from "../types";
+import { FormControlLabel, MenuItem, Pagination, PaletteMode, Paper, Select, Switch, Tooltip } from "@mui/material";
 import PlayCircleIcon from '@mui/icons-material/PlayCircle';
 import StarBorderIcon from '@mui/icons-material/StarBorder';
-import { useEffect, useState } from "react";
-import APICall from "../Hooks/APICall";
 import { ScaleLoader } from "react-spinners";
-// import ImageLoader from "./ImageLoader";
-// interface props {
-//     page: number
-//     handlePageChange: (event: React.ChangeEvent<unknown>, value: number) => void,
-//     count: number,
-//     Movies: movies[],
-//     Sort: string,
-//     handleSortChange: (event: SelectChangeEvent) => void,
-//     handleOrderChange: (_event: React.ChangeEvent<unknown>) => void,
-//     Order:string
-// }
+import useMovies from "../Hooks/useMovies";
+
 interface props {
     Theme: PaletteMode
 }
 export default function MovieList(props: props) {
-    // const { count, handlePageChange, page, Movies, Sort, handleSortChange ,handleOrderChange,Order } = props
     const { Theme } = props;
-    const [page, setPage] = useState(1);
-    const [Loading, setLoading] = useState(false);
-    const [Order, setOrder] = useState('desc');
-    const [Sort, setSort] = useState('popularity');
-    // const [Genre, setGenre] = useState('');
-    const [Movies, setMovies] = useState<movies[]>([]);
-    const handleOrderChange = (_event: React.ChangeEvent<unknown>) => {
-        if (Order == 'desc') {
-            setOrder('asc')
-        } else {
-            setOrder('desc')
-        }
-    };
-    const handleSortChange = (event: SelectChangeEvent) => {
-        setSort(event.target.value as string);
-    };
-    const handlePageChange = (_event: React.ChangeEvent<unknown>, value: number) => {
-        console.log(value);
-        setPage(value);
-    };
-    const GetMovies = async () => {
-        setLoading(true)
-        const movies = await APICall.get(`/discover/movie?include_adult=false&include_video=false&language=en-US&page=${page}&sort_by=${Sort}.${Order}`)
-        if (movies) {
-            console.log(movies.data.results);
+    const { Movies, Loading, handleOrderChange, handleSortChange, handlePageChange, Sort, Order, page } = useMovies()
 
-            setMovies(movies.data.results);
-            setLoading(false)
-        } else {
-            setLoading(false)
-        }
-    }
-    useEffect(() => {
-        GetMovies()
-    }, [page, Sort, Order])
     if (Loading) {
         return (
             <div className="w-100 flex-grow-1 d-flex flex-column justify-content-center align-items-center">
-                <ScaleLoader color={Theme == 'dark'? 'white': '#1976d2'}/>
+                <ScaleLoader color={Theme == 'dark' ? 'white' : '#1976d2'} />
             </div>
         )
     } else {
@@ -84,7 +38,7 @@ export default function MovieList(props: props) {
                                     <MenuItem value={'vote_average'}>Ratings</MenuItem>
                                 </Select>
                             </div>
-                            <FormControlLabel control={<Switch color="secondary" defaultChecked />} onChange={handleOrderChange} label={Order == 'desc' ? 'Descending' : 'Ascending'} />
+                            <FormControlLabel control={<Switch color="secondary" checked={Order == 'asc' ? false : true}/>} onChange={handleOrderChange} label={Order == 'desc' ? 'Descending' : 'Ascending'} />
 
                         </div>
                     </Paper>

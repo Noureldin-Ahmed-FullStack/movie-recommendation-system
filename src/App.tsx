@@ -1,30 +1,17 @@
 
-import { createTheme, PaletteMode } from '@mui/material'
-import { ThemeProvider } from '@mui/material';
+import { useContext } from 'react';
 import './App.css'
-import Navbar from './Components/Navbar';
-import { useState } from 'react';
 import MovieList from './Components/MovieList';
+import { MyContext } from './Components/MyContextProvider';
+import { PaletteMode } from '@mui/material';
 function App() {
-  const [Theme, setTheme] = useState<PaletteMode>('dark')
-
-  const ToggleTheme = () => {
-    Theme == 'dark' ? setTheme('light') : setTheme('dark')
-  }
-  const theme = createTheme({
-    palette: {
-      mode: Theme
-    },
-  });
+  
+  const {Theme, ToggleTheme} = useContext(MyContext)
   return (
-    <ThemeProvider theme={theme}>
-      <Navbar ToggleTheme={ToggleTheme} Theme={Theme} />
       <div className={`${Theme == 'dark' ? 'bg-dark text-light' : 'bg-light text-dark'} w-100 d-flex flex-column flex-grow-1 pt-3`}>
-
-        <MovieList Theme={Theme}/>
+        <MovieList Theme={Theme as PaletteMode}/>
 
       </div>
-    </ThemeProvider>
   )
 }
 

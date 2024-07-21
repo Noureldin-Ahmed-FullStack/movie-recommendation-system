@@ -16,14 +16,15 @@ import Brightness6Icon from '@mui/icons-material/Brightness6';
 import Brightness6OutlinedIcon from '@mui/icons-material/Brightness6Outlined';
 // import { Divider,  List, ListItem, ListItemButton, ListItemIcon, ListItemText, PaletteMode, SwipeableDrawer } from '@mui/material';
 import {PaletteMode } from '@mui/material';
+import { MyContext } from './MyContextProvider';
 const pages = ['Products', 'Pricing', 'Blog'];
-interface prop {
-    ToggleTheme: () => void,
-    Theme: PaletteMode
-}
+// interface prop {
+//     ToggleTheme: () => void,
+//     Theme: PaletteMode
+// }
 
-export default function Navbar(props: prop) {
-    const { ToggleTheme, Theme } = props
+export default function Navbar() {
+    const { ToggleTheme, Theme } = React.useContext(MyContext)
 
     // const [open, setOpen] = React.useState(false);
 

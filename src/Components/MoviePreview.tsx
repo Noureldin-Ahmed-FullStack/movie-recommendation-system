@@ -6,7 +6,7 @@ export default function MoviePreview(props:props) {
     const {movie} = props
   return (
     <div className=''>
-        
+        {movie.title}
     </div>
   )
 }

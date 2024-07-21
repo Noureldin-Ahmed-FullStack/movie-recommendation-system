@@ -15,7 +15,6 @@ import MenuItem from '@mui/material/MenuItem';
 import Brightness6Icon from '@mui/icons-material/Brightness6';
 import Brightness6OutlinedIcon from '@mui/icons-material/Brightness6Outlined';
 // import { Divider,  List, ListItem, ListItemButton, ListItemIcon, ListItemText, PaletteMode, SwipeableDrawer } from '@mui/material';
-import {PaletteMode } from '@mui/material';
 import { MyContext } from './MyContextProvider';
 const pages = ['Products', 'Pricing', 'Blog'];
 // interface prop {

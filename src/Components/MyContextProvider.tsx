@@ -1,5 +1,5 @@
-import { createTheme, PaletteMode, Theme } from '@mui/material';
-import { createContext, useMemo, useState} from 'react';
+import { PaletteMode } from '@mui/material';
+import { createContext, useState} from 'react';
 
 
 interface MyContextProps {

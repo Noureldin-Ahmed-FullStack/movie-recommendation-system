@@ -2,8 +2,7 @@ import { Outlet } from 'react-router-dom'
 import Navbar from './Components/Navbar'
 import { createTheme, ThemeProvider } from '@mui/material'
 import { useContext } from 'react'
-import MyContextProvider, { MyContext } from './Components/MyContextProvider'
-import { Theme } from '@emotion/react'
+import { MyContext } from './Components/MyContextProvider'
 
 export default function Layout() {
     const { Theme } = useContext(MyContext)

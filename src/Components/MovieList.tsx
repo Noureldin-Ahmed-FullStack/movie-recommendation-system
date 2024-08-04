@@ -2,16 +2,17 @@ import { FormControlLabel, MenuItem, Pagination, PaletteMode, Paper, Select, Swi
 import PlayCircleIcon from '@mui/icons-material/PlayCircle';
 import StarBorderIcon from '@mui/icons-material/StarBorder';
 import { ScaleLoader } from "react-spinners";
-import useMovies from "../Hooks/useMovies";
+import useMovies from "../Hooks/useMoviesQuery";
+// import useMovies from "../Hooks/useMovies";
 
 interface props {
     Theme: PaletteMode
 }
 export default function MovieList(props: props) {
     const { Theme } = props;
-    const { Movies, Loading, handleOrderChange, handleSortChange, handlePageChange, Sort, Order, page } = useMovies()
+    const { Movies, isLoading, handleOrderChange, handleSortChange, handlePageChange, sort, order, page } = useMovies()
 
-    if (Loading) {
+    if (isLoading) {
         return (
             <div className="w-100 flex-grow-1 d-flex flex-column justify-content-center align-items-center">
                 <ScaleLoader color={Theme == 'dark' ? 'white' : '#1976d2'} />
@@ -28,7 +29,7 @@ export default function MovieList(props: props) {
                                 <Select
                                     labelId="sort-select"
                                     id="sort-select"
-                                    value={Sort}
+                                    value={sort}
                                     label="Age"
                                     onChange={handleSortChange}
                                 >
@@ -38,7 +39,7 @@ export default function MovieList(props: props) {
                                     <MenuItem value={'vote_average'}>Ratings</MenuItem>
                                 </Select>
                             </div>
-                            <FormControlLabel control={<Switch color="secondary" checked={Order == 'asc' ? false : true}/>} onChange={handleOrderChange} label={Order == 'desc' ? 'Descending' : 'Ascending'} />
+                            <FormControlLabel control={<Switch color="secondary" checked={order == 'asc' ? false : true}/>} onChange={handleOrderChange} label={order == 'desc' ? 'Descending' : 'Ascending'} />
 
                         </div>
                     </Paper>
